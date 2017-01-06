@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 
 class List(models.Model):
-	pass
+	text = models.TextField(default = '')
 
 class Item(models.Model):
 	text = models.TextField(default = '')
