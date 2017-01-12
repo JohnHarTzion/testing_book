@@ -1,5 +1,5 @@
 from django.test import TestCase
-from lists.forms import ItemForm
+from lists.forms import EMPTY_ITEM_ERROR, ItemForm
 
 class ItemFormTest(TestCase):
 

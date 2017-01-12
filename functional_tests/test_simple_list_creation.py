@@ -39,6 +39,7 @@ class NewVisitorTest(FunctionalTests):
 		#text to that effect.
 		
 		#She visits that URL - her To-Do list is still there.
+		inputbox = get_item_input_box()
 
 		#Satisfied, she goes back to sleep
 
