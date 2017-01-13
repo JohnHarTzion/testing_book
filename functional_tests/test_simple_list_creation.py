@@ -1,7 +1,7 @@
-from .base import FunctionalTests
 import time
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from .base import FunctionalTests
 
 class NewVisitorTest(FunctionalTests):
 
@@ -15,7 +15,7 @@ class NewVisitorTest(FunctionalTests):
 		self.assertIn('To-Do', header_text)
 
 		#She is invited to enter a to-do item straight away
-		inputbox = self.browser.find_element_by_id('id_new_item')
+		inputbox = self.get_item_input_box()
 		self.assertEqual(inputbox.get_attribute('placeholder'), 'Enter a to-do item')
 
 		#She types "Buy peacock feather" into the text box(Edith's hobby is tying fly-fishing lures)
@@ -26,7 +26,7 @@ class NewVisitorTest(FunctionalTests):
 		self.check_for_rows_in_list_table('1: Buy peacock feathers')
 
 		#There is still a text box inviting her to add another item. She enter "Use peacock feathers to make a fly"(Edith is very methodical)
-		inputbox = self.browser.find_element_by_id('id_new_item')
+		inputbox = self.get_item_input_box()
 		inputbox.send_keys('Use peacock feathers to make a fly')
 		inputbox.send_keys(Keys.ENTER)
 
@@ -39,14 +39,14 @@ class NewVisitorTest(FunctionalTests):
 		#text to that effect.
 		
 		#She visits that URL - her To-Do list is still there.
-		inputbox = get_item_input_box()
+		inputbox = self.get_item_input_box()
 
 		#Satisfied, she goes back to sleep
 
 	def test_multiple_users_can_start_lists_at_different_urls(self):
 		#Edith start a new todo list
 		self.browser.get(self.server_url)
-		inputbox = self.browser.find_element_by_id('id_new_item')
+		inputbox = self.get_item_input_box()
 		inputbox.send_keys('Buy peacock feathers')
 		inputbox.send_keys(Keys.ENTER)
 		self.check_for_rows_in_list_table('1: Buy peacock feathers')
@@ -69,7 +69,7 @@ class NewVisitorTest(FunctionalTests):
 		self.assertNotIn('Make a fly', page_text)
 
 		#Francis starts a new list by entering a new item. He is less interesting than Edith....
-		inputbox = self.browser.find_element_by_id('id_new_item')
+		inputbox = self.get_item_input_box()
 		inputbox.send_keys('Buy milk')
 		inputbox.send_keys(Keys.ENTER)
 		self.check_for_rows_in_list_table("1: Buy milk")
